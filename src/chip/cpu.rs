@@ -1,3 +1,5 @@
+use super::op::Op;
+
 pub struct CPU {
     v: [u8; 16], // the V registers
     i: u16,      // the I register

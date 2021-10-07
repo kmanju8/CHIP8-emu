@@ -1,4 +1,4 @@
-enum Op {
+pub enum Op {
     LD,
     ADD,
     LDR

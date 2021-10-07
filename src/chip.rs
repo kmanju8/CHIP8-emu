@@ -1,7 +1,13 @@
+use std::io;
+use std::io::Read;
+use std::fs::File;
+
+mod cpu;
+mod op;
+
 // Const representing size of memory, stored as unsigned int
 // of pointer-size (dependant on computer architecture)
 const MEMORY_SIZE: usize = 4096;
-
 
 pub struct CHIP8 {
     // create 4kB of memory
@@ -14,11 +20,11 @@ impl CHIP8 {
     // resets memory to blank I think?
     pub fn new() -> Self {
         Self {
-            mem:[0, MEMORY_SIZE]
+            mem:[0; MEMORY_SIZE]
         }
     }
 
-    pub fn load_rom(&mut self, path: &str) -> io:: Results<()> {
+    pub fn load_rom(&mut self, path: &str) -> io::Result<()> {
 
         // tries to open rom
         let mut rom_file = File::open(path)?;
@@ -37,4 +43,7 @@ impl CHIP8 {
 
         Ok(())
     }
+
+    // TODO
+    // implement run method.
 }
