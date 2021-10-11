@@ -3,9 +3,11 @@ mod chip;
 fn main() {
     println!("Hello, world!");
 
-    let mut memory = chip::CHIP8::new();
+    let mut system = chip::CHIP8{};
 
-    memory.load_rom("/Users/keshav/chip8/c8games/PONG");
+    system.run();
+
+    
 
 
     

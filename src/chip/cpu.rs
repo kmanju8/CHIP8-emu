@@ -1,4 +1,5 @@
 use super::op::Op;
+use super::mem::Memory;
 
 pub struct CPU {
     v: [u8; 16], // the V registers
@@ -25,11 +26,11 @@ impl CPU {
 
     pub fn cycle(&mut self, memory: &mut Memory) {
         // read opcode in program counter
-        let opcode = memory.read16(self.pc);
-        // incremenet program counter
+        let opcode = memory.read(self.pc);
+        // increment program counter
         self.pc += 2;
         // decode instruction; probably bulk of work?
-        let op = Op:: decode(opcode);
+        let op = Op::decode(opcode);
 
         // some parameters pulled out for readability; these correspond to the instructional hex
         let x = Op::x(opcode);
@@ -39,7 +40,7 @@ impl CPU {
         // executes instruction
         match op {
             Op::LD => self.v[x] = kk,
-            Op::ADD => self.v[x] = self.v[x] +kk,
+            Op::ADD => self.v[x] = self.v[x] + kk,
             Op::LDR => self.v[x] = self.v[y],
         }
     }
