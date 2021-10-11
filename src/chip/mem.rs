@@ -2,6 +2,9 @@ use std::io;
 use std::io::Read;
 use std::fs::File;
 
+use byteorder::{BigEndian, ReadBytesExt};
+
+
 const MEMORY_SIZE: usize = 4096;
 
 pub struct Memory {
@@ -38,8 +41,7 @@ impl Memory {
 
     //should read opcode PC is currently pointing to.
     pub fn read(&mut self, pc: u16) -> u16 {
-        //TODO
 
-        1
+        return 1 as u16;
     }
 }

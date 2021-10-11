@@ -27,6 +27,7 @@ impl CPU {
     pub fn cycle(&mut self, memory: &mut Memory) {
         // read opcode in program counter
         let opcode = memory.read(self.pc);
+        println!("{}", opcode);
         // increment program counter
         self.pc += 2;
         // decode instruction; probably bulk of work?
