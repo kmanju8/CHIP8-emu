@@ -2,7 +2,7 @@ use std::io;
 use std::io::Read;
 use std::fs::File;
 
-use byteorder::{ByteOrder, BigEndian, LittleEndian};
+use byteorder::{ByteOrder, BigEndian};
 
 
 const MEMORY_SIZE: usize = 4096;
@@ -42,7 +42,7 @@ impl Memory {
     //should read opcode PC is currently pointing to.
     pub fn read(&mut self, pc: u16) -> u16 {
 
-        println!("that is {:X?}", BigEndian::read_u16(&self.bytes[pc as usize..(pc+2) as usize]));
+        // println!("that is {:X?}", BigEndian::read_u16(&self.bytes[pc as usize..(pc+2) as usize]));
         return BigEndian::read_u16(&self.bytes[pc as usize..(pc+2) as usize]) as u16;
     }
 }
