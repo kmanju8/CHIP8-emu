@@ -22,6 +22,8 @@ impl CHIP8 {
         loop{
             //need to pass in some kind of memory
             cpu.cycle(&mut mem);
+
+            //refresh screen?
         }
     }
 }

@@ -9,7 +9,9 @@ pub enum Op {
     SE_Y,
     LD,
     ADD,
-    LDR
+    LDR,
+    LD_I,
+    DRW
 }
 
 
@@ -30,6 +32,11 @@ impl Op {
             0x6000 => Self::LD,
             0x7000 => Self::ADD,
             0x8000 => Self::LDR,
+
+            0xA000 => Self::LD_I,
+
+            0xD000 => Self::DRW,
+
             _ => panic!("Invalid opcode: {:04X}", opcode),
         }
     }
