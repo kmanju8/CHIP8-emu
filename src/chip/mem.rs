@@ -14,7 +14,7 @@ pub struct Memory {
 impl Memory {
 
     pub fn new() -> Self {
-        let mut bytes = [0; MEMORY_SIZE];
+        let  bytes = [0; MEMORY_SIZE];
 
         Self { bytes }
     }
