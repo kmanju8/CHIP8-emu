@@ -8,9 +8,6 @@ mod screen;
 use sdl2::pixels::Color;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
-use sdl2::rect::Point;
-use sdl2::render::Canvas;
-use std::time::Duration;
 
 // Const representing size of memory, stored as unsigned int
 // // of pointer-size (dependant on computer architecture)
@@ -27,7 +24,10 @@ impl CHIP8 {
         let mut cpu = cpu::CPU::new();
         let mut mem = mem::Memory::new();
         let mut screen = screen::Screen::new();
-        mem.load_rom("/Users/keshav/chip8/c8games/PONG");
+        match mem.load_rom("/Users/keshav/chip8/c8games/PONG"){
+            Ok(()) => (),
+            Err(e) => panic!("Failed to load rom: {:?}", e)
+        }
 
         // for the time being, will not handle errors. Will do after actual implementation.
         let scale_factor = 15;
@@ -43,7 +43,10 @@ impl CHIP8 {
     
         let mut canvas = window.into_canvas().build().unwrap();
 
-        canvas.set_logical_size(64,32);
+        match canvas.set_logical_size(64,32) {
+            Ok(()) => (),
+            Err(e) => panic!("Failed to set screen size: {:?}", e)
+        }
     
         canvas.set_draw_color(Color::RGB(0, 255, 255));
         canvas.clear();

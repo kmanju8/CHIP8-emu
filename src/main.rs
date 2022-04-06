@@ -1,6 +1,6 @@
 mod chip;
 
-static FPS: u32 = 30;
+// static FPS: u32 = 30;
 
 fn main() {
 
