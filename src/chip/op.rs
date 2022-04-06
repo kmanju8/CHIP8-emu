@@ -49,6 +49,10 @@ impl Op {
         ((opcode & 0x00F0) >> 4) as usize
     }
 
+    pub fn n(opcode: u16) -> usize {
+        ((opcode & 0x000F) >> 4) as usize
+    }
+
     pub fn kk(opcode: u16) -> u8 {
         (opcode & 0x00FF) as u8
     }

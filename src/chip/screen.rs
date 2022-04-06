@@ -16,16 +16,16 @@ impl Screen{
     // implement collision detection in here as well I guess
     pub fn draw(&mut self, canvas: &mut sdl2::render::Canvas<sdl2::video::Window>, x: usize, y: usize, sprite: Vec<u8>){
 
-        let height: usize = 0
+        let mut height: usize = 0;
         for row in sprite {
 
-            self.screen[height] = self.screen[height]^((row as u64) << (56 - x))
+            self.screen[height] = self.screen[height]^((row as u64) << (56 - x));
 
-            height += 1
+            height += 1;
         }
 
         // XOR is ^
-        self.screen[]^sprite
+        // self.screen[]^sprite
         // will need to throw in modulo for screen wrap
         // need to make sure data at array addresses is changed
 

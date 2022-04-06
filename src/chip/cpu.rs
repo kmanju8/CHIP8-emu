@@ -69,7 +69,7 @@ impl CPU {
 
             Op::DRW => {
                 // draw n-byte sprite at (v[x],v[y]), featuring screenwrap
-                Screen::draw(canvas, x, y, memory.getsprite(self.i,n))
+                screen.draw(canvas, x, y, memory.getsprite(self.i,n))
 
                 // let's abstract this into a separate file for graphics
             }
