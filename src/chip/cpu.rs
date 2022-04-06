@@ -1,5 +1,6 @@
 use super::op::Op;
 use super::mem::Memory;
+use super::screen::Screen;
 
 pub struct CPU {
     v: [u8; 16], // the V registers
@@ -27,7 +28,7 @@ impl CPU {
         }
     }
 
-    pub fn cycle(&mut self, memory: &mut Memory) {
+    pub fn cycle(&mut self, memory: &mut Memory, canvas: &mut sdl2::render::Canvas<sdl2::video::Window>, screen: &mut Screen) {
         // read opcode in program counter
         let opcode = memory.read(self.pc);
         // increment program counter
@@ -35,9 +36,11 @@ impl CPU {
         // decode instruction; probably bulk of work?
         let op = Op::decode(opcode);
         // println!("{:X}",opcode);
-        // some parameters pulled out for readability; these correspond to the instructional hex
+        // some parameters pulled out for readability; 
+        // these correspond to the instructional hex
         let x = Op::x(opcode);
         let y = Op::y(opcode);
+        let n = Op::n(opcode);
         let kk = Op::kk(opcode);
         let nnn = Op::nnn(opcode);
 
@@ -65,7 +68,9 @@ impl CPU {
             Op::LD_I => self.i = nnn,
 
             Op::DRW => {
-                // draw sprite at (v[x],v[y])
+                // draw n-byte sprite at (v[x],v[y]), featuring screenwrap
+                Screen::draw(canvas, x, y, memory.getsprite(self.i,n))
+
                 // let's abstract this into a separate file for graphics
             }
         }
