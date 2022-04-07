@@ -31,23 +31,22 @@ impl Memory {
         // rom_data is the buffer here, in which 'self' is loaded to
         let rom_size = rom_file.read_to_end(&mut rom_data)?;
 
-        // loads rom into memory from 0x200
-        for i in 0.. rom_size {
-            self.bytes[0x200 + i] = rom_data[i]
-        }
+        // // loads rom into memory from 0x200
+        // for i in 0.. rom_size {
+        //     self.bytes[0x200 + i] = rom_data[i]
+        // }
+        self.bytes[512..(rom_size + 512)].clone_from_slice(&rom_data[..rom_size]);
 
         Ok(())
     }
 
     //should read opcode PC is currently pointing to.
     pub fn read(&mut self, pc: u16) -> u16 {
-        // println!("that is {:X?}", BigEndian::read_u16(&self.bytes[pc as usize..(pc+2) as usize]));
-        return BigEndian::read_u16(&self.bytes[pc as usize..(pc+2) as usize]) as u16;
+        BigEndian::read_u16(&self.bytes[pc as usize..(pc+2) as usize]) as u16
     }
 
     pub fn getsprite(&mut self, i: u16, n: usize) -> Vec<u8> {
-        // println!("that is {:X?}", BigEndian::read_u16(&self.bytes[pc as usize..(pc+2) as usize]));
-        return self.bytes[i as usize..(i as usize) + n ].to_vec();
+        self.bytes[i as usize..(i as usize) + n ].to_vec()
     }
 
 }

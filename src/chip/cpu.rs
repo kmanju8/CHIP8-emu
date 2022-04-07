@@ -63,7 +63,7 @@ impl CPU {
             Op::SNE => if self.v[x] != kk {self.pc+=2},
             Op::SE_Y => if self.v[x] == self.v[y] {self.pc+=2},
             Op::LD => self.v[x] = kk,
-            Op::ADD => self.v[x] = self.v[x] + kk,
+            Op::ADD => self.v[x] += kk,
             Op::LDR => self.v[x] = self.v[y],
             Op::LD_I => self.i = nnn,
 

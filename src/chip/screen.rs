@@ -18,28 +18,25 @@ impl Screen{
         }
     }
 
-    // will implement drawing of sprites to coords here
-    // implement collision detection in here as well I guess
+    // TODO: Still have to account for screen wrap
     pub fn draw(&mut self, canvas: &mut sdl2::render::Canvas<sdl2::video::Window>, x: usize, y: usize, sprite: Vec<u8>){
 
-        let mut height: usize = 0;
-        for row in sprite {
+        for (height,row) in sprite.into_iter().enumerate() {
 
-            self.screen[y+height] = self.screen[y+height]^((row as u64) << (56 - x));
+            self.screen[y+height] ^= (row as u64) << (56 - x);
 
             let mut row: u64 = self.screen[y+height];
-            height += 1;
-
+            let row_height: i32 = (y + height) as i32;
+            
             // will have screen clears in between frames, so okay to draw only ON pixels and ignore OFF
-            for i in row.view_bits_mut::<Msb0>() {
-                if *i {
-                    match canvas.draw_point(Point::new(1,1)) {
+            for (i,lit) in row.view_bits_mut::<Msb0>().into_iter().enumerate() {
+                if *lit {
+                    match canvas.draw_point(Point::new((x + i) as i32,row_height)) {
                         Ok(()) => (),
                         Err(e) => println!("Failed to draw point to cavas: {}", e)
                     }
                 }
             }
-            // canvas.draw_point(Point::new(i,i));
         }
 
         canvas.present();

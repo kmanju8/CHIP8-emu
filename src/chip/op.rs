@@ -6,10 +6,12 @@ pub enum Op {
     CALL,
     SE,
     SNE,
+    #[allow(non_camel_case_types)]
     SE_Y,
     LD,
     ADD,
     LDR,
+    #[allow(non_camel_case_types)]
     LD_I,
     DRW
 }
