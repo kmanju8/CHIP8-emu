@@ -65,12 +65,25 @@ impl CPU {
             Op::LD => self.v[x] = kk,
             Op::ADD => self.v[x] += kk,
             Op::LDR => self.v[x] = self.v[y],
-            Op::LD_I => self.i = nnn,
+           
+            // ----------whole block in prog
+            Op::LD_I => (),
+            Op::LD_VDT =>  self.v[x] = self.dt,
+            Op::LD_K => (),
+            Op::LD_DTV => self.dt = self.v[x],
+            Op::LD_ST => (),
+            Op::ADD_I => (),
+            Op::LD_F => (),
+            Op::LD_B => {
+                println!("{:X}", self.v[x]);
+            },
+            Op::LD_IV => (),
+            Op::LD_VI => (),
 
+            // needs work
             Op::DRW => {
                 // draw n-byte sprite at (v[x],v[y]), featuring screenwrap
                 screen.draw(canvas, x, y, memory.getsprite(self.i,n))
-
                 // let's abstract this into a separate file for graphics
             }
         }

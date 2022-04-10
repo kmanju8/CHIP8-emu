@@ -15,6 +15,7 @@ impl Memory {
 
     pub fn new() -> Self {
         let  bytes = [0; MEMORY_SIZE];
+        //want to set sprites for CHIP-8 hex digits in 0x000 to 0x1FF
 
         Self { bytes }
     }
